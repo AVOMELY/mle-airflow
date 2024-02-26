@@ -4,13 +4,12 @@ def send_telegram_success_message(context): # на вход принимаем �
     hook = TelegramHook(telegram_conn_id='test',
                         token='6304595276:AAG3pGSKcG2c_BWMNG_KEFNsnV8QiUHXg0A',
                         chat_id='-4157862253')
-    
-    dag = context['dag']
+    dag = context['task_instance_key_str']
     run_id = context['run_id']
 
     message = f'Исполненение DAG {dag} с id={run_id} прошло успешно!' # определение текста сообщения
     hook.send_message({
-        'chat_id': '- ',
+        'chat_id': '-4157862253',
         'text': message
     }) # отправление сообщения 
 

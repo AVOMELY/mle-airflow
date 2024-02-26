@@ -2,16 +2,13 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 import pendulum
 from steps.churn import create_table, extract, transform, load
-from steps.messages import (
-    send_telegram_success_message,
-    send_telegram_failure_message
-    )
+from steps.messages import send_telegram_success_message, send_telegram_failure_message
 
 
 with DAG(
     dag_id='alt_churn',
     schedule='@once',
-    start_date=pendulum.datetime(2024, 2, 21, tz="UTC"),
+    start_date=pendulum.datetime(2024, 2, 25, tz="UTC"),
     on_success_callback=send_telegram_success_message,
     on_failure_callback=send_telegram_failure_message) as dag:
     
